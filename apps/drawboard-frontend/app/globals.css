@@ -1,0 +1,114 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─────────────────────────────────────────────────────────────
+   Design tokens (shadcn/ui, HSL). Warm paper light theme with a
+   violet accent; dark theme is used by the board when it toggles
+   the `dark` class on <html>.
+   ───────────────────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --background: 40 33% 98%;
+    --foreground: 250 14% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 250 14% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 250 14% 11%;
+    --primary: 253 62% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 252 40% 95%;
+    --secondary-foreground: 253 50% 38%;
+    --muted: 40 18% 94%;
+    --muted-foreground: 250 8% 45%;
+    --accent: 252 40% 95%;
+    --accent-foreground: 253 50% 38%;
+    --destructive: 0 70% 52%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 40 14% 89%;
+    --input: 40 14% 86%;
+    --ring: 253 62% 56%;
+    --radius: 0.75rem;
+    --ink: 256 22% 20%;
+    --ink-foreground: 250 40% 98%;
+    --tone-lavender: 256 42% 95%;
+    --tone-peach: 28 60% 94%;
+    --tone-mint: 130 26% 93%;
+    --tone-butter: 44 90% 92%;
+  }
+  .dark {
+    --background: 232 16% 8%;
+    --foreground: 0 0% 95%;
+    --card: 232 15% 11%;
+    --card-foreground: 0 0% 95%;
+    --popover: 232 15% 11%;
+    --popover-foreground: 0 0% 95%;
+    --primary: 253 70% 68%;
+    --primary-foreground: 252 30% 10%;
+    --secondary: 232 12% 17%;
+    --secondary-foreground: 250 70% 85%;
+    --muted: 232 12% 17%;
+    --muted-foreground: 232 8% 68%;
+    --accent: 232 12% 20%;
+    --accent-foreground: 0 0% 95%;
+    --destructive: 0 62% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 232 10% 22%;
+    --input: 232 10% 26%;
+    --ring: 253 70% 68%;
+    --ink: 232 16% 12%;
+    --ink-foreground: 0 0% 95%;
+    --tone-lavender: 256 20% 16%;
+    --tone-peach: 28 20% 15%;
+    --tone-mint: 130 12% 14%;
+    --tone-butter: 44 25% 15%;
+  }
+
+  * { @apply border-border; }
+  html { scroll-behavior: smooth; scroll-padding-top: 96px; -webkit-text-size-adjust: 100%; }
+  body { @apply bg-background text-foreground font-sans antialiased; }
+  button, input, textarea, select { font: inherit; }
+  button, a, input, summary, textarea { -webkit-tap-highlight-color: transparent; }
+  ::selection { @apply bg-primary/20 text-foreground; }
+  :focus-visible { @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background; }
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Marketing typography helpers
+   ───────────────────────────────────────────────────────────── */
+@layer components {
+  .display { @apply font-sans font-semibold tracking-[-0.02em] leading-[1.05] text-balance; }
+  .display em { @apply font-sans not-italic font-semibold text-primary; }
+  .eyebrow { @apply inline-flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.18em] text-muted-foreground; }
+  .prose-muted { @apply text-muted-foreground leading-relaxed text-pretty; }
+  .shimmer-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(110deg, hsl(var(--foreground)) 30%, hsl(var(--primary)) 50%, hsl(var(--foreground)) 70%);
+    background-size: 200% 100%;
+    animation: shimmer 4s linear infinite;
+  }
+  .dot-grid {
+    background-image: radial-gradient(hsl(var(--foreground) / 0.12) 1px, transparent 1px);
+    background-size: 22px 22px;
+  }
+  .glass { @apply bg-white/80 backdrop-blur-xl border border-foreground/[0.07] shadow-soft dark:bg-card/80 dark:border-white/10; }
+  .nice-scroll { scrollbar-width: thin; scrollbar-color: hsl(var(--border)) transparent; }
+  .nice-scroll::-webkit-scrollbar { width: 6px; }
+  .nice-scroll::-webkit-scrollbar-thumb { border-radius: 9999px; background: hsl(var(--border)); }
+  .skip-link { @apply fixed left-4 -top-20 z-[100] rounded-md bg-background px-3 py-2 text-sm shadow focus:top-4; }
+
+  /* Staggered reveal — apply `.reveal` to a parent, children get delayed rise-in */
+  .reveal > * { @apply animate-rise-in; }
+  .reveal > *:nth-child(1) { animation-delay: 0ms; }
+  .reveal > *:nth-child(2) { animation-delay: 80ms; }
+  .reveal > *:nth-child(3) { animation-delay: 160ms; }
+  .reveal > *:nth-child(4) { animation-delay: 240ms; }
+  .reveal > *:nth-child(5) { animation-delay: 320ms; }
+  .reveal > *:nth-child(6) { animation-delay: 400ms; }
+  .reveal > *:nth-child(7) { animation-delay: 480ms; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
