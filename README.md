@@ -17,7 +17,6 @@
 - [Scripts](#scripts)
 - [API & WebSocket](#api--websocket)
 - [Database](#database)
-- [Deployment](#deployment)
 
 ---
 
