@@ -10,7 +10,7 @@ import cors from "cors";
 
 const app = express();
 const allowedOrigins = new Set(
-    (process.env.FRONTEND_ORIGINS ?? "https://drawboard-peach.vercel.app,http://localhost:3000")
+    (process.env.FRONTEND_ORIGINS ?? "http://localhost:3000")
         .split(",")
         .map((origin) => origin.trim().replace(/\/$/, ""))
         .filter(Boolean),

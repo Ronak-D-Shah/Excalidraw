@@ -48,7 +48,6 @@ Users can draw as a **guest**, or **sign up** to create shared rooms, invite oth
 | Realtime | **ws** (WebSocket) |
 | Database | **PostgreSQL** + **Prisma** |
 | Tooling | TypeScript project references, ESLint, Prettier, Turbo cache |
-| Deploy (frontend) | **Vercel** — [drawboard-peach.vercel.app](https://drawboard-peach.vercel.app/) |
 
 ---
 
@@ -334,32 +333,6 @@ Room ────── Chat
 | `User` | id, email, password (optional), name, photo, googleId |
 | `Room` | id, unique slug, adminId, createdAt |
 | `Chat` | Persisted room messages / drawing payloads |
-
----
-
-## Deployment
-
-### Frontend (Vercel)
-
-**Production:** [https://drawboard-peach.vercel.app/](https://drawboard-peach.vercel.app/)
-
-Configured via [`vercel.json`](./vercel.json):
-
-- Install: `pnpm install`
-- Build: `pnpm turbo run build --filter=drawboard-frontend`
-- Framework: Next.js
-
-Set these in the Vercel project:
-
-```env
-NEXT_PUBLIC_HTTP_BACKEND=<your-api-url>
-NEXT_PUBLIC_WS_URL=<your-ws-url>
-NEXT_PUBLIC_SITE_URL=https://drawboard-peach.vercel.app
-```
-
-### Backends
-
-Deploy `http-backend` and `ws-backend` to any Node host (Railway, Render, Fly.io, VPS). Point them at the same Postgres `DATABASE_URL` and shared `JWT_SECRET`. Ensure the WS host supports sticky / long-lived WebSocket connections.
 
 ---
 
